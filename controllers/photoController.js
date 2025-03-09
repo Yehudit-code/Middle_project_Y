@@ -36,12 +36,14 @@ const updatePhoto = async (req, res) => {
     res.json(updatedPhoto)
 }
 
-const deletePhoto = async (req, res)=>{
-    const {id} = req.body
+const deletePhoto = async (req, res) => {
+    const { id } = req.body
     if (!id)
         return res.status(400).json(`ID is required`)
     const photo = await Photo.findByID(id)
-    const result =await photo.deleteOne()
+    if (!photo)
+        return res.status(400).json(`don't found this photo`)
+    const result = await Photo.deleteOne(photo)
     res.json(`success to delete ${result}`)
 }
 module.exports = { createPhoto, getAllPhotos, getPhotoByID, updatePhoto, deletePhoto }
