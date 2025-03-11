@@ -10,7 +10,7 @@ const createTodo = async (req, res) => {
 }
 
 const getTodoByID = async (req, res) => {
-    const { id } = req.body
+    const { id } = req.params
     if (!id)
         return res.status(400).json(`not found ID`)
     const todo = await Todo.findById(id)
@@ -27,8 +27,8 @@ const getAllTodos = async (req, res) => {
 }
 
 const updateTodo = async (req, res) => {
-    const { title, tags, id } = req.body
-    if (!title || !tags || id)
+    const { title, tags, id ,complete} = req.body
+    if (!title || !tags || !id)
         return res.status(400).json(`title, id and tags are required`)
     const todo = await Todo.findById(id)
     if (!todo)

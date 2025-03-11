@@ -1,6 +1,7 @@
 const Photo = require("../models/Photo")
 
 const createPhoto = async (req, res) => {
+    res.json("hello")
     const { title, imageUrl } = req.body
     if (!imageUrl)
         return res.status(400).json(`imageUrl is required`)
@@ -17,7 +18,7 @@ const getAllPhotos = async (req, res) => {
 
 const getPhotoByID = async (req, res) => {
     const { id } = req.params
-    const photo = await Photo.findByID(id)
+    const photo = await Photo.findById(id)
     if (!photo)
         return res.status(400).json(`photo not found`)
     res.json(photo)
@@ -27,7 +28,7 @@ const updatePhoto = async (req, res) => {
     const { id, title, imageUrl } = req.body
     if (!imageUrl || !id)
         return res.status(400).json(`imageUrl and id are required`)
-    const photo = await Photo.findByID(id)
+    const photo = await Photo.findById(id)
     if (!photo)
         return res.status(400).json(`photo not found`)
     photo.title = title
@@ -40,7 +41,7 @@ const deletePhoto = async (req, res) => {
     const { id } = req.body
     if (!id)
         return res.status(400).json(`ID is required`)
-    const photo = await Photo.findByID(id)
+    const photo = await Photo.findById(id)
     if (!photo)
         return res.status(400).json(`don't found this photo`)
     const result = await Photo.deleteOne(photo)

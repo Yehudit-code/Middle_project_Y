@@ -10,7 +10,7 @@ const createPost = async (req, res) => {
 }
 
 const getPostByID = async (req, res) => {
-    const { id } = req.body
+    const { id } = req.params
     if (!id)
         return res.status(400).json(`not found ID`)
     const post = await Post.findById(id)
@@ -28,7 +28,7 @@ const getAllPosts = async (req, res) => {
 
 const updatePost = async (req, res) => {
     const { title, body, id } = req.body
-    if (!title || !body || id)
+    if (!title || !body || !id)
         return res.status(400).json(`title, id and body are required`)
     const post = await Post.findById(id)
     if (!post)
