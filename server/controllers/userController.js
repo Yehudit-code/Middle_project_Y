@@ -22,29 +22,30 @@ const createUser = async (req, res) => {
     if (!name || !username ||!phone) {
         return res.status(400).send("title and body and phone is required")
     }
-    const post = await User.create({ name, username,email,address,phone })
+    const user = await User.create({ name, username,email,address,phone })
+    res.json({user})
 }
 
 const updateUser = async (req, res) => {
     const {id, name, username,email,address,phone } = req.body
     if (!id||!name || !username ||!phone) {
-        return res.status(400).send("title and body and phone is required")
+        return res.status(400).send("id,name,username and phone  is required")
     }
-    const user = await User.findById(id).lean()
+    const user = await User.findById(id)
     user.name = name
     user.username = username
     user.email = email
     user.address = address
     user.phone = phone
-    const updateUser = await User.save(user)
-    res.json(updateUser)
+    const updateUser = await user.save()
+    res.send(updateUser)
 }
 
 const deleteUser = async (req, res) => {
     const { id } = req.body
     if (!id)
         return res.status(400).json("I must id")
-    const user = await User.findByID(id)
+    const user = await User.findById(id)
     if (!user)
         return res.status(404).json("not found user")
     const result = await User.deleteOne(user)
