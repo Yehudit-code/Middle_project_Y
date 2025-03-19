@@ -1,17 +1,33 @@
 import logo from './logo.svg';
 import './App.css';
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import Counter from './Components/Counter';
+import Todo from './Components/Todo';
+import User from './Components/User';
+import Post from './Components/Post';
+import Photo from './Components/Photo';
+import Home from './Components/Home';
+import MenuBar from './Components/MenuBar';
+
 
 function App() {
   return (
+
     <div className="App">
-      <h1>hello my project😂😂</h1>
+    
+      
       <Router>
-        <Counter />
+      <MenuBar />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/todo" element={<Todo />} />
+          <Route path="/user" element={<User />} />
+          <Route path="/post" element={<Post />} />
+          <Route path="/photo" element={<Photo />} />
+
+        </Routes>
       </Router>
 
-      
+
     </div>
   );
 }
