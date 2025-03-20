@@ -2,8 +2,8 @@ const Todo = require("../models/Todo")
 
 const createTodo = async (req, res) => {
     const { title, tags, complete } = req.body
-    if (!title || !tags) {
-        return res.status(400).json(`title, complete and tags are required`)
+    if (!title) {
+        return res.status(400).json(`title is required`)
     }
     const todo = await Todo.create({ title, tags, complete })
     res.json(todo)
