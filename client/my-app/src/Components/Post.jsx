@@ -1,14 +1,13 @@
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import axios from 'axios'
+import axois from 'axios'
 import { useEffect, useState } from "react"
 
-const Post = () => {
-    const [posts, setPosts] = useState(["אין כלום!"])
+const Post = ()=>{
+    const [posts, setPosts] = useState([])
 
     const getAllPosts = async () => {
-        const res = await axios.get("http://localhost:1555/post")
-        const sorted=res.data.sort((a,b)=>a.id-b.id)
-        setPosts(sorted)
+        const res = await axois.get('http://localhost:1555/post')
+        const sortedItems = res.data.sort((a, b) => a.id - b.id);
+        setPosts(sortedItems)
     }
     useEffect(() => {
         getAllPosts()
@@ -20,5 +19,4 @@ const Post = () => {
         })}
     </>)
 }
-
-export default Post;
+export default Post
