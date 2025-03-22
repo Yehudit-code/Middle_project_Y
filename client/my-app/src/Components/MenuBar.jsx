@@ -14,7 +14,7 @@ const MenuBar = () => {
         },
         {
             label: 'User',
-            icon: 'pi pi-home',
+            icon: 'pi pi-user',
             command: () => {
                 navigate('./user')
             }

@@ -41,7 +41,7 @@ const updateTodo = async (req, res) => {
 }
 
 const deleteTodo = async (req, res) => {
-    const {id}= req.body
+    const {id}= req.params
     if (!id)
         return res.status(400).json(`ID is required`)
     const todo = await Todo.findById(id)

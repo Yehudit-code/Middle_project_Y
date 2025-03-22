@@ -3,24 +3,26 @@ import axois from 'axios'
 import { useEffect, useRef, useState } from "react";
 import { Card } from 'primereact/card';
 import { Button } from 'primereact/button';
-
-
+import axios from "axios";
 
 const SignalTodo = (props) => {
 
     const [checked, setChecked] = useState(false);
+    const deleteToDo = async () => {
+        const res = await axios.delete(`http://localhost:1555/todo/${props.todo._id}`)
+    }
 
     const footer = (
         <>
-
             <div className="card flex justify-content-center">
                 <p className="m-0">complete</p>
                 <Checkbox value={checked} onChange={e => setChecked(e.checked)} checked={checked}></Checkbox>
             </div>
-            <Button label="Save" icon="pi pi-check" />
-            <Button label="Cancel" severity="secondary" icon="pi pi-times" style={{ marginLeft: '0.5em' }} />
+            <Button label="Update" icon="pi pi-pencil" />
+            <Button onClick={deleteToDo} label="Delete" severity="secondary" icon="pi pi-times" style={{ marginLeft: '0.5em' }} />
         </>
     );
+
     const updateComplete = async () => {
         const newToDo = {
             id: props.todo._id,
@@ -28,14 +30,14 @@ const SignalTodo = (props) => {
             tags: props.todo.tags,
             complete: checked
         }
-        const res = await axois.put('http://localhost:1555/todo',  newToDo )
+        const res = await axois.put('http://localhost:1555/todo', newToDo)
     }
     useEffect(() => {
         { props.todo.complete ? setChecked(true) : setChecked(false) }
 
     }, [])
     useEffect(() => {
-         updateComplete()
+        updateComplete()
     }, [checked])
     return (<>
         <div className="card flex justify-content-center">
