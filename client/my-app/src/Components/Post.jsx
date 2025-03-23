@@ -1,5 +1,7 @@
 import axois from 'axios'
 import { useEffect, useState } from "react"
+import CreatePost from './CreatePost'
+import SignalPost from './SignalPost'
 
 const Post = ()=>{
     const [posts, setPosts] = useState([])
@@ -11,11 +13,12 @@ const Post = ()=>{
     }
     useEffect(() => {
         getAllPosts()
-    }, [])
+    }, [posts])
+
     return (<>
-        <h1>Post📫🚩🏤🚩</h1>
+    <CreatePost />
         {posts.map((e) => {
-            return <h3>{e.title}</h3>
+            return <SignalPost post={e}/>
         })}
     </>)
 }

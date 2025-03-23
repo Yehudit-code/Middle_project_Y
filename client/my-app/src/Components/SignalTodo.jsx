@@ -1,27 +1,24 @@
 import { Checkbox } from "primereact/checkbox"
 import axois from 'axios'
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { Card } from 'primereact/card';
 import { Button } from 'primereact/button';
 import axios from "axios";
+import UpdateTodo from "./UpdateTodo";
 
 const SignalTodo = (props) => {
-
     const [checked, setChecked] = useState(false);
+
     const deleteToDo = async () => {
-        const res = await axios.delete(`http://localhost:1555/todo/${props.todo._id}`)
+        await axios.delete(`http://localhost:1555/todo/${props.todo._id}`)
     }
 
-    const footer = (
-        <>
-            <div className="card flex justify-content-center">
-                <p className="m-0">complete</p>
-                <Checkbox value={checked} onChange={e => setChecked(e.checked)} checked={checked}></Checkbox>
-            </div>
-            <Button label="Update" icon="pi pi-pencil" />
-            <Button onClick={deleteToDo} label="Delete" severity="secondary" icon="pi pi-times" style={{ marginLeft: '0.5em' }} />
-        </>
-    );
+    const footer = (<>
+        <div className="card flex justify-content-center"> 
+            <p className="m-0">complete</p>
+            <Checkbox value={checked} onChange={e => setChecked(e.checked)} checked={checked}></Checkbox>
+        </div>
+    </>)
 
     const updateComplete = async () => {
         const newToDo = {
@@ -30,7 +27,7 @@ const SignalTodo = (props) => {
             tags: props.todo.tags,
             complete: checked
         }
-        const res = await axois.put('http://localhost:1555/todo', newToDo)
+        await axois.put('http://localhost:1555/todo', newToDo)
     }
     useEffect(() => {
         { props.todo.complete ? setChecked(true) : setChecked(false) }
@@ -39,11 +36,15 @@ const SignalTodo = (props) => {
     useEffect(() => {
         updateComplete()
     }, [checked])
+
     return (<>
         <div className="card flex justify-content-center">
-            <Card title={props.todo.tags} subTitle={props.todo.title} footer={footer} className="md:w-25rem">
-                <p className="m-0">
-                </p>
+            
+            <Card subTitle={props.todo.tags} title={props.todo.title} footer={footer} className="md:w-25rem">
+            {/* <p className="m-0">complete</p> */}
+            {/* <Checkbox value={checked} onChange={e => setChecked(e.checked)} checked={checked}></Checkbox> */}
+                <UpdateTodo id={props.todo._id} />
+                <Button onClick={deleteToDo} label="Delete" severity="secondary" icon="pi pi-times" style={{ marginLeft: '0.5em' }} />
             </Card>
         </div>
     </>)
