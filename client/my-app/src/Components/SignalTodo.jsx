@@ -14,7 +14,7 @@ const SignalTodo = (props) => {
     }
 
     const footer = (<>
-        <div className="card flex justify-content-center"> 
+        <div className="card flex justify-content-center">
             <p className="m-0">complete</p>
             <Checkbox value={checked} onChange={e => setChecked(e.checked)} checked={checked}></Checkbox>
         </div>
@@ -29,24 +29,24 @@ const SignalTodo = (props) => {
         }
         await axois.put('http://localhost:1555/todo', newToDo)
     }
-    useEffect(() => {
-        { props.todo.complete ? setChecked(true) : setChecked(false) }
 
-    }, [])
-    useEffect(() => {
-        updateComplete()
-    }, [checked])
+useEffect(() => {
+    { props.todo.complete ? setChecked(true) : setChecked(false) }
 
-    return (<>
-        <div className="card flex justify-content-center">
-            
-            <Card subTitle={props.todo.tags} title={props.todo.title} footer={footer} className="md:w-25rem">
-            {/* <p className="m-0">complete</p> */}
-            {/* <Checkbox value={checked} onChange={e => setChecked(e.checked)} checked={checked}></Checkbox> */}
-                <UpdateTodo id={props.todo._id} />
-                <Button onClick={deleteToDo} label="Delete" severity="secondary" icon="pi pi-times" style={{ marginLeft: '0.5em' }} />
-            </Card>
-        </div>
-    </>)
+}, [])
+
+useEffect(() => {
+    updateComplete()
+}, [checked])
+
+return (<>
+    <div className="card flex justify-content-center">
+
+        <Card subTitle={props.todo.tags} title={props.todo.title} footer={footer} className="md:w-25rem">
+            <UpdateTodo id={props.todo._id} />
+            <Button onClick={deleteToDo} label="Delete" severity="secondary" icon="pi pi-times" style={{ marginLeft: '0.5em' }} />
+        </Card>
+    </div>
+</>)
 }
 export default SignalTodo

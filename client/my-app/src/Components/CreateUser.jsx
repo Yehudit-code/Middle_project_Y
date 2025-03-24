@@ -1,11 +1,9 @@
 import { Button } from "primereact/button";
 import { Dialog } from "primereact/dialog";
 import { useState } from "react";
-import { useForm } from "react-hook-form";
 import { InputText } from "primereact/inputtext";
 import React from "react";
 import axios from "axios";
-//import InputText from '.primereact/InputText';
 
 const CreateUser = () => {
     const [visible, setVisible] = useState(false);
@@ -16,10 +14,10 @@ const CreateUser = () => {
     const [phone, setPhone] = useState();
 
     const SaveTodo = async (e) => {
-        await axios.post('http://localhost:1555/user', { name, username,email,address,phone })
+        await axios.post('http://localhost:1555/user', { name, username, email, address, phone })
     }
     return (<>
-        <div className="card flex justify-content-end">
+        <div className="card flex justify-content-start">
             <Button label="Add new user" icon="pi pi-plus" onClick={() => setVisible(true)} />
             <Dialog
                 visible={visible}
@@ -42,7 +40,7 @@ const CreateUser = () => {
                         </div>
                         <div className="inline-flex flex-column gap-2">
                             <label htmlFor="tags" className="text-primary-50 font-semibold">
-                               email
+                                email
                             </label>
                             <InputText onChange={(e) => { setEmail(e.target.value) }} className="bg-white-alpha-20 border-none p-3 text-primary-50" style={{ required: true }} />
                         </div>
@@ -66,7 +64,6 @@ const CreateUser = () => {
                 )}
             ></Dialog>
         </div>
-        {/* <Todo dialogAdd={dialogAdd} /> */}
     </>)
 }
 export default CreateUser

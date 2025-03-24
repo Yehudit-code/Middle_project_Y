@@ -18,3 +18,60 @@ body {
   border-radius: 10px;
   margin-bottom: 1rem;
 }
+
+.responsive-img {
+  width: 25%;
+  height: auto;
+  max-width: 600px;
+}
+
+@media (max-width: 768px) {
+  .responsive-img {
+    max-width: 90%;
+  }
+}
+.p-toolbar {
+  display: flex;
+  flex-wrap: wrap; /* Allow wrapping for stacking */
+}
+
+.p-toolbar-group-start,
+.p-toolbar-group-center,
+.p-toolbar-group-end {
+  flex: 1; /* Distribute available space */
+  display: flex;
+  justify-content: center; /* Center content horizontally */
+}
+
+.p-toolbar-group-start {
+  justify-content: flex-start; /* Align left group to the start */
+}
+
+.p-toolbar-group-end {
+  justify-content: flex-end; /* Align right group to the end */
+}
+
+/* .card {
+  width: 100%; /* Take full width on smaller screens */
+
+button {
+  width: auto; /* Adjust button width */
+}
+
+/* Media query for smaller screens */
+@media (max-width: 600px) {
+  .p-toolbar {
+    flex-direction: column; /* Stack groups vertically */
+  }
+
+  .p-toolbar-group-start,
+  .p-toolbar-group-center,
+  .p-toolbar-group-end {
+    width: 100%; /* Take full width */
+    justify-content: center; /* Center content in each group */
+  }
+
+  button {
+    width: 100%; /* Button takes full width on mobile */
+  }
+}

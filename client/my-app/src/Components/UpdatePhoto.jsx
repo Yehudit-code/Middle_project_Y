@@ -1,0 +1,45 @@
+import axios from "axios";
+import { Button } from "primereact/button";
+import { Dialog } from "primereact/dialog";
+import { InputText } from "primereact/inputtext";
+import { useState } from "react";
+
+
+const UpdatePhoto = (props) => {
+    const [visible, setVisible] = useState(false)
+    const [title, setTitle] = useState();
+    const [imageUrl, setImageUrl] = useState();
+
+    const UpdatePhoto = async () => {
+        await axios.put('http://localhost:1555/todo/', { id: props.id, title, imageUrl })
+    }
+
+    return (<>
+        <Button label="Update" icon="pi pi-pencil" onClick={() => setVisible(true)} />
+        <div className="card flex justify-content-center">
+            <Dialog
+                visible={visible}
+                modal
+                onHide={() => { if (!visible) return; setVisible(false); }}
+                content={({ hide }) => (
+                    <div className="flex flex-column px-8 py-5 gap-4" style={{ borderRadius: '12px', backgroundImage: 'radial-gradient(circle at left top, var(--primary-400), var(--primary-700))' }}>
+                        <div className="inline-flex flex-column gap-2">
+                            <label htmlFor="title" className="text-primary-50 font-semibold">Title</label>
+                            <InputText onChange={(e) => { setTitle(e.target.value) }} className="bg-white-alpha-20 border-none p-3 text-primary-50" style={{ required: true }} />
+                        </div>
+                        <div className="inline-flex flex-column gap-2">
+                            <label htmlFor="tags" className="text-primary-50 font-semibold">imageUrl</label>
+                            <InputText onChange={(e) => { setImageUrl(e.target.value) }} className="bg-white-alpha-20 border-none p-3 text-primary-50" style={{ required: true }} />
+                        </div>
+                        <div className="flex align-items-center gap-2">
+                            <Button label="Save" icon="pi pi-check" onClick={(e) => { UpdatePhoto(); hide(e) }} text className="p-3 w-full text-primary-50 border-1 border-white-alpha-30 hover:bg-white-alpha-20"></Button>
+                            <Button label="Cancel" icon="pi pi-times" onClick={(e) => hide(e)} text className="p-3 w-full text-primary-50 border-1 border-white-alpha-30 hover:bg-white-alpha-10"></Button>
+                        </div>
+                    </div>
+                )}
+            ></Dialog>
+        </div>
+    </>)
+}
+
+export default UpdatePhoto

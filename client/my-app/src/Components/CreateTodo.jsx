@@ -11,7 +11,7 @@ const CreateTodo = () => {
     const [tags, setTags] = useState();
 
     const SaveTodo = async (e) => {
-        await axios.post('http://localhost:1555/todo', { title: title, tags: tags })
+        await axios.post('http://localhost:1555/todo', {title, tags })
     }
 
     return (<>

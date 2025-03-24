@@ -3,6 +3,8 @@ import { Button } from "primereact/button";
 import { Dialog } from "primereact/dialog";
 import { InputText } from "primereact/inputtext";
 import { useState } from "react";
+import { InputTextarea } from "primereact/inputtextarea";
+
 
 const CreatePost=()=>{
     const [visible, setVisible] = useState(false);
@@ -27,8 +29,8 @@ const CreatePost=()=>{
                         </div>
                         <div className="inline-flex flex-column gap-2">
                             <label htmlFor="tags" className="text-primary-50 font-semibold">Body</label>
-                            <InputText onChange={(e) => { setBody(e.target.value) }} className="bg-white-alpha-20 border-none p-3 text-primary-50" style={{ required: true }} />
-                        </div>
+                            <InputTextarea value={body} onChange={(e) => setBody(e.target.value)} rows={5} cols={30} />
+                            </div>
                         <div className="flex align-items-center gap-2">
                             <Button label="Save" icon="pi pi-check" onClick={(e) => { SavePost(e); hide(e) }} text className="p-3 w-full text-primary-50 border-1 border-white-alpha-30 hover:bg-white-alpha-20"></Button>
                             <Button label="Cancel" icon="pi pi-times" onClick={(e) => hide(e)} text className="p-3 w-full text-primary-50 border-1 border-white-alpha-30 hover:bg-white-alpha-10"></Button>
