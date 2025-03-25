@@ -6,7 +6,8 @@ const createTodo = async (req, res) => {
         return res.status(400).json(`title is required`)
     }
     const todo = await Todo.create({ title, tags, complete })
-    res.json(todo)
+    const todos = await Post.find()
+    res.json(posts)
 }
 
 const getTodoByID = async (req, res) => {

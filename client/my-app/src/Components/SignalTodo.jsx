@@ -30,23 +30,22 @@ const SignalTodo = (props) => {
         await axois.put('http://localhost:1555/todo', newToDo)
     }
 
-useEffect(() => {
-    { props.todo.complete ? setChecked(true) : setChecked(false) }
+    useEffect(() => {
+        { props.todo.complete ? setChecked(true) : setChecked(false) }
 
-}, [])
+    }, [])
 
-useEffect(() => {
-    updateComplete()
-}, [checked])
+    useEffect(() => {
+        updateComplete()
+    }, [checked])
 
-return (<>
-    <div className="card flex justify-content-center">
-
-        <Card subTitle={props.todo.tags} title={props.todo.title} footer={footer} className="md:w-25rem">
-            <UpdateTodo id={props.todo._id} />
-            <Button onClick={deleteToDo} label="Delete" severity="secondary" icon="pi pi-times" style={{ marginLeft: '0.5em' }} />
-        </Card>
-    </div>
-</>)
+    return (<>
+        <div className="card flex justify-content-center">
+            <Card subTitle={props.todo.tags} title={props.todo.title} footer={footer} className="md:w-25rem">
+                <UpdateTodo id={props.todo._id} />
+                <Button onClick={deleteToDo} label="Delete" severity="secondary" icon="pi pi-times" style={{ marginLeft: '0.5em' }} />
+            </Card>
+        </div>
+    </>)
 }
 export default SignalTodo

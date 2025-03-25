@@ -5,8 +5,9 @@ const createPost = async (req, res) => {
     if (!title || !body) {
         return res.status(400).json(`title and body are required`)
     }
-    const post = await Post.create({ title, body })
-    res.json(post)
+    await Post.create({ title, body })
+    const posts = await Post.find()
+    res.json(posts)
 }
 
 const getPostByID = async (req, res) => {
@@ -35,8 +36,9 @@ const updatePost = async (req, res) => {
         return res.status(400).json(`post not found`)
     post.title = title
     post.body = body
-    const newPost = await post.save()
-    res.send(newPost)
+    await post.save()
+    const posts = await Post.find()
+    res.json(posts)
 }
 
 const deletePost = async (req, res) => {
@@ -46,8 +48,9 @@ const deletePost = async (req, res) => {
     const post = await Post.findById(id)
     if (!post)
         return res.status(400).json(`post not found`)
-    const result = await Post.deleteOne(post)
-    res.json(`success to delete ${result}`)
+    await Post.deleteOne(post)
+    const posts = await Post.find()
+    res.json(posts)
 }
 
 module.exports = { createPost, getPostByID, getAllPosts, updatePost, deletePost }

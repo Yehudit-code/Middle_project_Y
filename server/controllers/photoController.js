@@ -1,12 +1,12 @@
 const Photo = require("../models/Photo")
 
 const createPhoto = async (req, res) => {
-    res.json("hello")
     const { title, imageUrl } = req.body
     if (!imageUrl)
         return res.status(400).json(`imageUrl is required`)
-    const photo = await Photo.create({ title, imageUrl })
-    res.json(photo)
+    await Photo.create({ title, imageUrl })
+    const photos = await Post.find()
+    res.json(photos)
 }
 
 const getAllPhotos = async (req, res) => {
@@ -33,8 +33,9 @@ const updatePhoto = async (req, res) => {
         return res.status(400).json(`photo not found`)
     photo.title = title
     photo.imageUrl = imageUrl
-    const updatedPhoto = await photo.save()
-    res.json(updatedPhoto)
+    await photo.save()
+    const photos = await Post.find()
+    res.json(photos)
 }
 
 const deletePhoto = async (req, res) => {
@@ -44,7 +45,9 @@ const deletePhoto = async (req, res) => {
     const photo = await Photo.findById(id)
     if (!photo)
         return res.status(400).json(`don't found this photo`)
-    const result = await Photo.deleteOne(photo)
-    res.json(`success to delete ${result}`)
+    await Photo.deleteOne(photo)
+    const photos = await Post.find()
+    res.json(photos)
+    
 }
 module.exports = { createPhoto, getAllPhotos, getPhotoByID, updatePhoto, deletePhoto }

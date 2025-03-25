@@ -19,15 +19,13 @@ body {
   margin-bottom: 1rem;
 }
 
-.responsive-img {
-  width: 25%;
-  height: auto;
-  max-width: 600px;
-}
+
 
 @media (max-width: 768px) {
   .responsive-img {
-    max-width: 90%;
+    max-width: 70%;
+    max-height: 50%;
+
   }
 }
 .p-toolbar {

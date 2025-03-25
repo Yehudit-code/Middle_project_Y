@@ -11,7 +11,7 @@ const UpdatePhoto = (props) => {
     const [imageUrl, setImageUrl] = useState();
 
     const UpdatePhoto = async () => {
-        await axios.put('http://localhost:1555/todo/', { id: props.id, title, imageUrl })
+        await axios.put('http://localhost:1555/photo', { id: props.id, title, imageUrl })
     }
 
     return (<>

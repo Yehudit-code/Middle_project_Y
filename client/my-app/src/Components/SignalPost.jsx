@@ -10,7 +10,6 @@ const SignalPost = (props) => {
         console.log(props.post._id)
         const res = await axios.delete(`http://localhost:1555/post/${props.post._id}`)
         console.log(res);
-
     }
 
     const footer = (<>

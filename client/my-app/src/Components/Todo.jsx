@@ -11,7 +11,7 @@ import { Toolbar } from 'primereact/toolbar';
 const Todo = () => {
     const [todos, setTodos] = useState([])
 
-    
+
     const getAllToDos = async () => {
         const res = await axois.get('http://localhost:1555/todo')
         const sortedItems = res.data.sort((a, b) => a.id - b.id);

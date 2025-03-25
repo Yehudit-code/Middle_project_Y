@@ -6,6 +6,7 @@ import SignalPost from './SignalPost'
 const Post = ()=>{
     const [posts, setPosts] = useState([])
 
+
     const getAllPosts = async () => {
         const res = await axois.get('http://localhost:1555/post')
         const sortedItems = res.data.sort((a, b) => a.id - b.id);
@@ -13,10 +14,10 @@ const Post = ()=>{
     }
     useEffect(() => {
         getAllPosts()
-    }, [posts])
+    }, [])
 
     return (<>
-    <CreatePost />
+    <CreatePost setPosts ={setPosts}/>
         {posts.map((e) => {
             return <SignalPost post={e}/>
         })}
