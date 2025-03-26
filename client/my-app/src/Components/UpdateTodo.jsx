@@ -11,7 +11,8 @@ const UpdateTodo = (props) => {
     const [tags, setTags] = useState()
 
     const updateTodo = async () => {
-        await axios.put('http://localhost:1555/todo/', { id: props.id, title: title, tags: tags })
+        const res = await axios.put('http://localhost:1555/todo/', { id: props.id, title: title, tags: tags })
+        props.getAllToDos()
     }
 
     return (<>

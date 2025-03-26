@@ -5,9 +5,9 @@ const createTodo = async (req, res) => {
     if (!title) {
         return res.status(400).json(`title is required`)
     }
-    const todo = await Todo.create({ title, tags, complete })
-    const todos = await Post.find()
-    res.json(posts)
+    await Todo.create({ title, tags, complete })
+    const todos = await Todo.find()
+    res.json(todos)
 }
 
 const getTodoByID = async (req, res) => {
@@ -37,8 +37,9 @@ const updateTodo = async (req, res) => {
     todo.title = title
     todo.tags = tags
     todo.complete = complete
-    const newTodo = await todo.save()
-    res.send(newTodo)
+    await todo.save()
+    const todos = await Todo.find()
+    res.json(todos)
 }
 
 const deleteTodo = async (req, res) => {
@@ -48,8 +49,9 @@ const deleteTodo = async (req, res) => {
     const todo = await Todo.findById(id)
     if (!todo)
         return res.status(400).json(`todo not found`)
-    const result = await Todo.deleteOne(todo)
-    res.json(`success to delete ${result}`)
+    await Todo.deleteOne(todo)
+    const todos = await Todo.find()
+    res.json(todos)
 }
 
 module.exports = { createTodo, getTodoByID, getAllTodos, updateTodo, deleteTodo }

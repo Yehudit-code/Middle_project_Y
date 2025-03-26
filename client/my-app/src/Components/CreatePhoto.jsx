@@ -5,13 +5,14 @@ import { InputText } from "primereact/inputtext";
 import React from "react";
 import axios from "axios";
 
-const CreatePhoto = () => {
+const CreatePhoto = (props) => {
     const [visible, setVisible] = useState(false);
     const [title, setTitle] = useState();
     const [imageUrl, setImageUrl] = useState();
 
     const SavePhoto = async (e) => {
         await axios.post('http://localhost:1555/photo', { title, imageUrl })
+        props.getAllPhotos()
     }
 
     return (<>

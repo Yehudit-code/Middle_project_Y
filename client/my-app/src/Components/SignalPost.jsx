@@ -7,9 +7,8 @@ import UpdatePost from "./UpdatePost";
 const SignalPost = (props) => {
 
     const deletePost = async () => {
-        console.log(props.post._id)
-        const res = await axios.delete(`http://localhost:1555/post/${props.post._id}`)
-        console.log(res);
+        await axios.delete(`http://localhost:1555/post/${props.post._id}`)
+        props.getAllPosts()
     }
 
     const footer = (<>
@@ -23,7 +22,7 @@ const SignalPost = (props) => {
     return (<>
         <div className="card flex justify-content-center">
             <Card title={props.post.title} subTitle={props.post.body} footer={footer} className="md:w-25rem">
-                <UpdatePost id={props.post._id} />
+                <UpdatePost id={props.post._id} getAllPosts={props.getAllPosts}/>
                 <Button onClick={deletePost} label="Delete" severity="secondary" icon="pi pi-times" style={{ marginLeft: '0.5em' }} />
                 
             </Card>

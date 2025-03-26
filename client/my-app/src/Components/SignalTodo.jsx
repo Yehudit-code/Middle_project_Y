@@ -10,7 +10,8 @@ const SignalTodo = (props) => {
     const [checked, setChecked] = useState(false);
 
     const deleteToDo = async () => {
-        await axios.delete(`http://localhost:1555/todo/${props.todo._id}`)
+        const res=await axios.delete(`http://localhost:1555/todo/${props.todo._id}`)
+        props.getAllToDos()
     }
 
     const footer = (<>
@@ -27,12 +28,12 @@ const SignalTodo = (props) => {
             tags: props.todo.tags,
             complete: checked
         }
-        await axois.put('http://localhost:1555/todo', newToDo)
+        const res=await axois.put('http://localhost:1555/todo', newToDo)
+        props.getAllToDos()
     }
 
     useEffect(() => {
         { props.todo.complete ? setChecked(true) : setChecked(false) }
-
     }, [])
 
     useEffect(() => {
@@ -42,10 +43,11 @@ const SignalTodo = (props) => {
     return (<>
         <div className="card flex justify-content-center">
             <Card subTitle={props.todo.tags} title={props.todo.title} footer={footer} className="md:w-25rem">
-                <UpdateTodo id={props.todo._id} />
+                <UpdateTodo id={props.todo._id} getAllToDos={props.getAllToDos}/>
                 <Button onClick={deleteToDo} label="Delete" severity="secondary" icon="pi pi-times" style={{ marginLeft: '0.5em' }} />
             </Card>
         </div>
     </>)
 }
+
 export default SignalTodo

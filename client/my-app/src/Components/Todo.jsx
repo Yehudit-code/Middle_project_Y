@@ -11,7 +11,6 @@ import { Toolbar } from 'primereact/toolbar';
 const Todo = () => {
     const [todos, setTodos] = useState([])
 
-
     const getAllToDos = async () => {
         const res = await axois.get('http://localhost:1555/todo')
         const sortedItems = res.data.sort((a, b) => a.id - b.id);
@@ -24,7 +23,7 @@ const Todo = () => {
             <InputText placeholder="Search" />
         </IconField>
     )
-
+ 
     // const searchInToDos = (event) => {
     //     setInputValue(event.target.value)
     //     const filterToDos = todos.filter(todo => { return todo._id.includes(inputValue) })
@@ -33,14 +32,14 @@ const Todo = () => {
 
     useEffect(() => {
         getAllToDos()
-    }, [todos])
+    }, [])
 
     return (<>
         <div className="card">
-            <Toolbar start={<CreateTodo />} center={centerContent} />
+            <Toolbar start={<CreateTodo getAllToDos={getAllToDos}/>} center={centerContent} />
         </div>
         {todos.map((e) => {
-            return <SignalTodo todo={e} />
+            return <SignalTodo todo={e} getAllToDos={getAllToDos}/>
         })}
     </>)
 }

@@ -12,6 +12,7 @@ const UpdatePhoto = (props) => {
 
     const UpdatePhoto = async () => {
         await axios.put('http://localhost:1555/photo', { id: props.id, title, imageUrl })
+        props.getAllPhotos()
     }
 
     return (<>

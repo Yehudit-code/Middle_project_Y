@@ -18,17 +18,18 @@ const getUserByID = async (req, res) => {
 }
 
 const createUser = async (req, res) => {
-    const { name, username,email,address,phone } = req.body
-    if (!name || !username ||!phone) {
+    const { name, username, email, address, phone } = req.body
+    if (!name || !username || !phone) {
         return res.status(400).send("title and body and phone is required")
     }
-    const user = await User.create({ name, username,email,address,phone })
-    res.json({user})
+    const user = await User.create({ name, username, email, address, phone })
+    const result = await User.find()
+    res.json({result})
 }
 
 const updateUser = async (req, res) => {
-    const {id, name, username,email,address,phone } = req.body
-    if (!id||!name || !username ||!phone) {
+    const { id, name, username, email, address, phone } = req.body
+    if (!id || !name || !username || !phone) {
         return res.status(400).send("id,name,username and phone  is required")
     }
     const user = await User.findById(id)
@@ -38,17 +39,19 @@ const updateUser = async (req, res) => {
     user.address = address
     user.phone = phone
     const updateUser = await user.save()
-    res.send(updateUser)
+    const result = await User.find()
+    res.json( result)
 }
 
 const deleteUser = async (req, res) => {
-    const { id } = req.body
+    const {id} = req.params
     if (!id)
         return res.status(400).json("I must id")
     const user = await User.findById(id)
     if (!user)
         return res.status(404).json("not found user")
-    const result = await User.deleteOne(user)
-    res.json(`success to delete ${result}`)
+    const del = await User.deleteOne(user)
+    const result = await User.find()
+    res.json( result)
 }
 module.exports = { getAllUsers, getUserByID, createUser, updateUser, deleteUser }

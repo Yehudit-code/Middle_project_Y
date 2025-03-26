@@ -6,14 +6,14 @@ import { useState } from "react";
 import { InputTextarea } from "primereact/inputtextarea";
 
 
-const CreatePost=({setPosts})=>{
+const CreatePost=(props)=>{
     const [visible, setVisible] = useState(false);
     const [title, setTitle] = useState();
     const [body, setBody] = useState();
 
     const SavePost = async (e) => {
-        const res = await axios.post('http://localhost:1555/post', { title: title, body: body })
-        setPosts(res.data)
+        await axios.post('http://localhost:1555/post', { title: title, body: body })
+        props.getAllPosts()
     }
     return(<>
      <div className="card flex justify-content-start">

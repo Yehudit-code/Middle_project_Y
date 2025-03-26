@@ -10,9 +10,9 @@ const UpdatePost = (props) => {
     const [title, setTitle] = useState("")
     const [body, setBody] = useState("")
 
-
     const updatePost = async () => {
-        await axios.put('http://localhost:1555/post', { id:props.id,title: title, body: body })
+        await axios.put('http://localhost:1555/post', { id: props.id, title: title, body: body })
+        props.getAllPosts()
     }
     return (<><Button label="Update" icon="pi pi-pencil" onClick={() => setVisible(true)} />
         <div className="card flex justify-content-center">
@@ -29,11 +29,6 @@ const UpdatePost = (props) => {
                         <div className="inline-flex flex-column gap-2">
                             <label htmlFor="tags" className="text-primary-50 font-semibold">Body</label>
                             <InputTextarea className="bg-white-alpha-20 border-none p-3 text-primary-50" value={body} onChange={(e) => setBody(e.target.value)} rows={5} cols={30} />
-                            
-                            {/* <InputText onChange={(e) => { setBody(e.target.value) }} className="bg-white-alpha-20 border-none p-3 text-primary-50" style={{ required: true }} /> */}
-                            {/* <div className="card flex justify-content-center">
-                                
-                            </div> */}
                         </div>
                         <div className="flex align-items-center gap-2">
                             <Button label="Save" icon="pi pi-check" onClick={(e) => { updatePost(); hide(e) }} text className="p-3 w-full text-primary-50 border-1 border-white-alpha-30 hover:bg-white-alpha-20"></Button>

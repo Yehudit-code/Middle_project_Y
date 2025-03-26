@@ -15,14 +15,14 @@ const Photo = () => {
     }
     useEffect(() => {
         getAllPhotos()
-    }, [photos])
+    }, [])
     
     return (<>
      <div className="card">
-                <Toolbar start={<CreatePhoto />}  />
+                <Toolbar start={<CreatePhoto getAllPhotos={getAllPhotos}/>}  />
             </div>
         {photos.map((e) => {
-            return <SignalPhoto photo ={e}/>
+            return <SignalPhoto photo ={e} getAllPhotos={getAllPhotos}/>
         })}
     </>)
 }

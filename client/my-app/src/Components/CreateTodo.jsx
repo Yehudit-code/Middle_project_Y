@@ -5,13 +5,14 @@ import { InputText } from "primereact/inputtext";
 import React from "react";
 import axios from "axios";
 
-const CreateTodo = () => {
+const CreateTodo = (props) => {
     const [visible, setVisible] = useState(false);
     const [title, setTitle] = useState();
     const [tags, setTags] = useState();
 
     const SaveTodo = async (e) => {
-        await axios.post('http://localhost:1555/todo', {title, tags })
+        const res=await axios.post('http://localhost:1555/todo', {title, tags })
+        props.getAllToDos()
     }
 
     return (<>

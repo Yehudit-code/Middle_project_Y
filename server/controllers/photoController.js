@@ -5,7 +5,7 @@ const createPhoto = async (req, res) => {
     if (!imageUrl)
         return res.status(400).json(`imageUrl is required`)
     await Photo.create({ title, imageUrl })
-    const photos = await Post.find()
+    const photos =await Photo.find()
     res.json(photos)
 }
 
@@ -34,7 +34,7 @@ const updatePhoto = async (req, res) => {
     photo.title = title
     photo.imageUrl = imageUrl
     await photo.save()
-    const photos = await Post.find()
+    const photos = await Photo.find()
     res.json(photos)
 }
 
@@ -46,7 +46,7 @@ const deletePhoto = async (req, res) => {
     if (!photo)
         return res.status(400).json(`don't found this photo`)
     await Photo.deleteOne(photo)
-    const photos = await Post.find()
+    const photos = await Photo.find()
     res.json(photos)
     
 }
